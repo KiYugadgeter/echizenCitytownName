@@ -57,8 +57,8 @@
         var numberoftown = name.length;
         var failed = 0;
 
-        function onkeypresswithindex(index) {
-            txtarea.onkeydown = function(e) {
+        function keypresswithindex(index) {
+            return function(e) {
                 if (e.keyCode === 13) {
                     if (data[index][0] === txtarea.value) {
                         data.splice(index, 1);
@@ -99,8 +99,8 @@
 
         function giver() {
             var index = randint(0, town_name.length - 1);
+            txtarea.onkeypresswithindex(index);
             tname.innerHTML = town_name[index];
-            onkeypresswithindex(index);
 
 
         }

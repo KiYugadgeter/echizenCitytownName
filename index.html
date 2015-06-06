@@ -54,6 +54,24 @@
 
     </style>
     <script>
+        var numberoftown = name.length;
+        var failed = 0;
+
+        function onkeypresswithindex(index) {
+            txtarea.onkeydown = function(e) {
+                if (e.keyCode === 13) {
+                    if (data[index][0] === txtarea.value) {
+                        data.splice(index, 1);
+                        names.splice(index, 1);
+                        txtarea.value = "";
+                        rb.innerHTML = "";
+                        console.log("正解");
+                        giver();
+                    }
+                }
+            }
+        }
+
         function randint(x, y) {
             return Math.floor(Math.random() * (y - x + 1)) + x;
         }
@@ -78,22 +96,11 @@
         txtarea.oninput = function () {
             rb.innerHTML = txtarea.value;
         };
-        txtarea.onkeydown = function(e) {
-            if (e.keyCode === 13) {
-                if (data[tname.innerHTML][0] === txtarea.value) {
-                    delete data[tname.innerHTML];
-                    txtarea.value = "";
-                    rb.innerHTML = "";
-                    console.log("正解");
-                    giver();
-                }
-            }
-        };
 
         function giver() {
-            var town_name = Object.keys(data);
             var index = randint(0, town_name.length - 1);
             tname.innerHTML = town_name[index];
+            onkeypresswithindex(index);
 
 
         }
